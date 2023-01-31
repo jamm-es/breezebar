@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/breezebar">
+        <file>application/ApplicationResult.qml</file>
+        <file>bgui/BButton.qml</file>
+        <file>bgui/Style.js</file>
+        <file>setting/settings_base.csv</file>
+    </qresource>
+</RCC>
