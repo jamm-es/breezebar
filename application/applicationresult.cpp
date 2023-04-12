@@ -2,12 +2,6 @@
 #include <QProcess>
 #include <QDebug>
 
-ApplicationResult::ApplicationResult(QObject *parent) :
-    SearchResult{parent}
-{
-
-}
-
 ApplicationResult::ApplicationResult(const QString& title, const QString& context, int imageIndex, QObject* parent) :
     SearchResult(title, context, parent),
     imageIndex_(imageIndex)

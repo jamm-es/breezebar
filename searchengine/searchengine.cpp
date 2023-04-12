@@ -1,7 +1,6 @@
 #include "searchengine.h"
 #include <QStack>
 #include <QDebug>
-#include <QRegularExpression>
 
 SearchEngine::SearchEngine(std::initializer_list<SearchModule*> modules, QQmlApplicationEngine& qmlEngine) :
     modules_(modules)

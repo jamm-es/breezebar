@@ -1,6 +1,8 @@
 #include "settingmodule.h"
 #include <QFile>
 #include <QTextStream>
+#include "settingresult.h"
+#include "settingimageprovider.h"
 
 void SettingModule::initializeIndex(SearchIndex& searchIndex) {
 
@@ -16,10 +18,19 @@ void SettingModule::initializeIndex(SearchIndex& searchIndex) {
     QTextStream csvStream(&file);
     QString line = csvStream.readLine();
     while(!line.isNull()) {
+        // split into category, name, uri, icon name
         QStringList lineParts = line.split(',');
 
-        qDebug() << lineParts[0] << lineParts[1] << lineParts[2];
+        QString searchTerm = lineParts.at(0) + ' ' + lineParts.at(1);
+        SearchResult* result = new SettingResult(lineParts[1], lineParts[0], lineParts[2], lineParts[3]);
+
+        searchIndex.addResult(searchTerm, result);
 
         line = csvStream.readLine();
     }
+}
+
+void SettingModule::initializeImageProvider(QQmlApplicationEngine& engine)
+{
+    engine.addImageProvider("setting", &imageProvider_);
 }

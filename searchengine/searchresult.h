@@ -20,6 +20,9 @@ public:
     QString context() const;
     virtual QString imagePath() const = 0;
 
+signals:
+    void titleChanged();
+
 protected:
     int moduleID_;
     QString title_;

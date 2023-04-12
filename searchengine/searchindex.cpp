@@ -54,11 +54,11 @@ void SearchIndex::addSingleResult(const QString& singleSearchTerm, SearchResult*
     }
 
     // traverse index tree and add result to node
-    SearchNode* currNode = indexRoot_;
-    SearchNode* prevNode = nullptr;
+    TrieNode* currNode = trieRoot_;
+    TrieNode* prevNode = nullptr;
     for(const QChar letter : singleSearchTerm) {
         prevNode = currNode;
-        currNode = currNode->childAt(letter);
+        currNode = currNode->getChild(letter);
 
         // if the letter isn't a child yet, add it
         if(currNode == nullptr) {

@@ -11,7 +11,12 @@ QImage ApplicationImageProvider::requestImage(const QString& id, QSize* size, co
     int index = id.toInt();
     QImage icon = images_.at(index);
     *size = icon.size();
-    return icon;
+    if(requestedSize.isValid()) {
+        return icon.scaled(requestedSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    }
+    else {
+        return icon;
+    }
 }
 
 int ApplicationImageProvider::addImage(QImage image)

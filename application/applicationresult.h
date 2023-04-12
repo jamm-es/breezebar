@@ -7,13 +7,13 @@ class ApplicationResult : public SearchResult
 {
     Q_OBJECT
 public:
-    explicit ApplicationResult(QObject *parent = nullptr);
-    ApplicationResult(const QString& name, const QString& context, int imageIndex, QObject *parent = nullptr);
+    ApplicationResult(const QString& title, const QString& context, int imageIndex, QObject *parent = nullptr);
 
     virtual QString delegate() const override;
     virtual QString imagePath() const override;
     Q_INVOKABLE void run() const;
     Q_INVOKABLE void runPrivileged() const;
+
 private:
     int imageIndex_;
 };

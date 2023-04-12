@@ -11,8 +11,8 @@ Rectangle {
     readonly property int numActions: 2;
 
     width: listView.width
-    height: childrenRect.height+2*Style.borderWidth
-    color: Style.resultColor
+    height: childrenRect.height+2*10
+    color: Style.fgColor
     radius: Style.baseRadius
 
     // actionLeft and actionRight return false when focus should be returned to bar
@@ -44,36 +44,38 @@ Rectangle {
     }
 
     RowLayout {
-        x: Style.borderWidth
-        y: Style.borderWidth
-        width: listView.width-2*Style.borderWidth
+        x: 10
+        y: 10
+        width: listView.width-2*10
         spacing: 10
 
         Image {
             id: image
             source: result.imagePath
-            Layout.preferredWidth: 96
-            Layout.preferredHeight: 96
+            Layout.preferredWidth: 80
+            Layout.preferredHeight: 80
             Layout.alignment: Qt.AlignTop
             fillMode: Image.Stretch
         }
         ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignTop
+            Layout.alignment: Qt.AlignVCenter
+            spacing: 2
 
             Text {
                 Layout.fillWidth: true
-                color: Style.mainColor
-                font.pixelSize: 30
-                font.family: "sans-serif"
+                color: Style.textColor
+                font.family: bFont
+                font.pixelSize: 24
                 elide: Text.ElideRight
                 text: result.title
             }
             Text {
                 Layout.fillWidth: true
-                color: Style.mutedColor
-                font.family: "sans-serif"
+                color: Style.textMutedColor
+                font.family: bFont
+                font.pixelSize: 12
                 elide: Text.ElideRight
                 text: result.context
             }
@@ -81,17 +83,17 @@ Rectangle {
                 Layout.fillWidth: true
 
                 BButton {
-                    id: first
                     flat: true
                     active: applicationResult.actionIndex === 0
-                    font.pixelSize: 24
-                    font.family: "sans-serif"
-                    text: "▶ Run"
+                    text: "Run"
+                    iconSource: 'qrc:/breezebar/resources/icons/player-play.svg'
                 }
                 BButton {
                     flat: true
                     active: applicationResult.actionIndex === 1
-                    text: "▶ Run as administrator"
+                    text: "Run as administrator"
+                    iconSource: 'qrc:/breezebar/resources/icons/shield.svg'
+
                 }
             }
         }

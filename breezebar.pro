@@ -1,4 +1,5 @@
-QT += quick
+QT += quick \
+    widgets
 
 SOURCES += \
     application/applicationimageprovider.cpp \
@@ -12,8 +13,13 @@ SOURCES += \
     searchengine/searchnode.cpp \
     searchengine/searchresult.cpp \
     main.cpp \
+    searchengine/tokennode.cpp \
+    searchengine/trienode.cpp \
+    setting/settingimageprovider.cpp \
     setting/settingmodule.cpp \
-    setting/settingmodule_win.cpp
+    setting/settingmodule_win.cpp \
+    setting/settingresult.cpp \
+    setting/settingresult_win.cpp
 
 win32 {
 SOURCES += \
@@ -48,7 +54,11 @@ HEADERS += \
     searchengine/searchmodule.h \
     searchengine/searchnode.h \
     searchengine/searchresult.h \
-    setting/settingmodule.h
+    searchengine/tokennode.h \
+    searchengine/trienode.h \
+    setting/settingimageprovider.h \
+    setting/settingmodule.h \
+    setting/settingresult.h
 
 # ensures that imports don't need to include the name of the module
 INCLUDEPATH += \
@@ -59,7 +69,9 @@ INCLUDEPATH += \
 DISTFILES += \
     Style.js \
     application/ApplicationResult.qml \
+    setting/SettingResult.qml \
     bgui/BButton.qml
+
 
 # install QHotkey with qdep
 QDEP_DEPENDS += Skycoder42/QHotkey

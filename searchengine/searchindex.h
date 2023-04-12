@@ -4,7 +4,8 @@
 #include <QString>
 #include <QVector>
 #include "searchresult.h"
-#include "searchnode.h"
+#include "trienode.h"
+#include "tokennode.h"
 
 class SearchIndex
 {
@@ -20,7 +21,8 @@ public:
     static QString sanitizeQuery(const QString& query);
 
 private:
-    SearchNode* indexRoot_;
+    TrieNode* trieRoot_;
+    TokenNode* tokenRoot_;
     QVector<SearchResult*> results_;
     static const int maxResults_;
 };

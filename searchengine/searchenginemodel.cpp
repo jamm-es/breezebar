@@ -14,6 +14,7 @@ QHash<int, QByteArray> SearchEngineModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[ResultRole] = "result";
+    roles[DelegateRole] = "delegate";
     roles[FocusedRole] = "focused";
     return roles;
 }
@@ -40,6 +41,8 @@ QVariant SearchEngineModel::data(const QModelIndex &index, int role) const
             }
         case FocusedRole:
             return index.row() == highlightIndex_;
+        case DelegateRole:
+            return index.row() == highlightIndex_ ? result->delegate() : "default";
         default:
             return QVariant();
     }
@@ -72,14 +75,27 @@ void SearchEngineModel::queryChanged(const QString& query)
     changePersistentIndexList(persistentIndexList(), newModelIndices);
 
     emit layoutChanged();
+    emit rowCountChanged();
 }
 
 void SearchEngineModel::incrementHighlight()
 {
 
     if(highlightIndex_ < resultIndices_.size()-1) {
+//        ++highlightIndex_;
+//        QModelIndex oldHighlightedIndex = createIndex(highlightIndex_-1, 0);
+//        QModelIndex newHighlightedIndex = createIndex(highlightIndex_, 0);
+//        QList<QPersistentModelIndex> changedIndices({oldHighlightedIndex, newHighlightedIndex});
+//        emit layoutAboutToBeChanged(changedIndices);
+//        emit dataChanged(oldHighlightedIndex, newHighlightedIndex, {FocusedRole, DelegateRole});
+//        qDebug() << "HELLO2" << highlightIndex_;
+//        emit highlightIndexChanged();
+//        emit layoutChanged(changedIndices);
+//        emit layoutAboutToBeChanged();
         ++highlightIndex_;
-        emit dataChanged(createIndex(highlightIndex_-1, 0), createIndex(highlightIndex_, 0), {FocusedRole});
+        emit dataChanged(createIndex(highlightIndex_-1, 0), createIndex(highlightIndex_, 0), {FocusedRole, DelegateRole});
+        emit highlightIndexChanged();
+//        emit layoutChanged();
     }
 
 }
@@ -87,8 +103,20 @@ void SearchEngineModel::incrementHighlight()
 void SearchEngineModel::decrementHighlight()
 {
     if(highlightIndex_ > 0) {
+//        --highlightIndex_;
+//        QModelIndex oldHighlightedIndex = createIndex(highlightIndex_+1, 0);
+//        QModelIndex newHighlightedIndex = createIndex(highlightIndex_, 0);
+//        QList<QPersistentModelIndex> changedIndices({oldHighlightedIndex, newHighlightedIndex});
+//        emit layoutAboutToBeChanged(changedIndices);
+//        emit dataChanged(newHighlightedIndex, oldHighlightedIndex, {FocusedRole, DelegateRole});
+//        qDebug() << "HELLO?";
+//        emit highlightIndexChanged();
+//        emit layoutChanged(changedIndices);
+//        emit layoutAboutToBeChanged();
         --highlightIndex_;
-        emit dataChanged(createIndex(highlightIndex_, 0), createIndex(highlightIndex_+1, 0), {FocusedRole});
+        emit dataChanged(createIndex(highlightIndex_, 0), createIndex(highlightIndex_+1, 0), {FocusedRole, DelegateRole});
+        emit highlightIndexChanged();
+//        emit layoutChanged();
     }
 }
 
